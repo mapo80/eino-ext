@@ -19,6 +19,7 @@ package openai
 import (
 	"context"
 	"encoding/json"
+	jsonv2 "encoding/json/v2"
 	"errors"
 	"fmt"
 	"io"
@@ -27,7 +28,6 @@ import (
 	"slices"
 	"sort"
 
-	"github.com/bytedance/sonic"
 	"github.com/eino-contrib/jsonschema"
 	"github.com/meguminnnnnnnnn/go-openai"
 
@@ -1190,7 +1190,7 @@ func populateRCFromExtra(extra map[string]json.RawMessage, msg *schema.Message) 
 	for _, key := range otherReasoningKeys {
 		if reasoningRawMessage, ok := extra[key]; ok {
 			var reasoningContent string
-			if err := sonic.Unmarshal(reasoningRawMessage, &reasoningContent); err == nil && reasoningContent != "" {
+			if err := jsonv2.Unmarshal(reasoningRawMessage, &reasoningContent, json.DefaultOptionsV1()); err == nil && reasoningContent != "" {
 				msg.ReasoningContent = reasoningContent
 				setReasoningContent(msg, reasoningContent)
 				break
