@@ -26,7 +26,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/bytedance/sonic"
 	"github.com/eino-contrib/jsonschema"
 	"github.com/google/uuid"
 	"google.golang.org/genai"
@@ -659,7 +658,7 @@ func convToolMessageToPart(toolName string, msg *schema.Message) (*genai.Part, e
 		return convMultiModalToolMessageToPart(toolName, msg.UserInputMultiContent)
 	}
 	response := make(map[string]any)
-	err := sonic.UnmarshalString(msg.Content, &response)
+	err := unmarshalString(msg.Content, &response)
 	if err != nil {
 		response = map[string]any{"output": msg.Content}
 	}
@@ -727,7 +726,7 @@ func convMultiModalToolMessageToPart(toolName string, inputs []schema.MessageInp
 	}
 	response := make(map[string]any)
 	if text != nil {
-		err := sonic.UnmarshalString(*text, &response)
+		err := unmarshalString(*text, &response)
 		if err != nil {
 			response = map[string]any{"output": *text}
 		}
@@ -836,7 +835,7 @@ func convSchemaMessage(message *schema.Message) (*genai.Content, error) {
 		for i := range message.ToolCalls {
 			call := &message.ToolCalls[i]
 			args := make(map[string]any)
-			err := sonic.UnmarshalString(call.Function.Arguments, &args)
+			err := unmarshalString(call.Function.Arguments, &args)
 			if err != nil {
 				return fmt.Errorf("unmarshal schema tool call arguments to map[string]any fail: %w", err)
 			}
@@ -1358,7 +1357,7 @@ func convFC(part *genai.Part) (*schema.ToolCall, error) {
 	}
 
 	tp := part.FunctionCall
-	args, err := sonic.MarshalString(tp.Args)
+	args, err := marshalString(tp.Args)
 	if err != nil {
 		return nil, fmt.Errorf("marshal gemini tool call arguments fail: %w", err)
 	}

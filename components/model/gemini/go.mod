@@ -1,10 +1,10 @@
 module github.com/cloudwego/eino-ext/components/model/gemini
 
-go 1.24
+go 1.27
 
 require (
-	github.com/bytedance/mockey v1.2.13
-	github.com/bytedance/sonic v1.14.1
+	github.com/bytedance/mockey v1.4.8
+	github.com/bytedance/sonic v1.15.4
 	github.com/cloudwego/eino v0.7.13
 	github.com/eino-contrib/jsonschema v1.0.3
 	github.com/google/uuid v1.6.0
@@ -20,7 +20,7 @@ require (
 	github.com/bahlo/generic-list-go v0.2.0 // indirect
 	github.com/buger/jsonparser v1.1.1 // indirect
 	github.com/bytedance/gopkg v0.1.3 // indirect
-	github.com/bytedance/sonic/loader v0.3.0 // indirect
+	github.com/bytedance/sonic/loader v0.5.2 // indirect
 	github.com/cloudwego/base64x v0.1.6 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/dustin/go-humanize v1.0.1 // indirect
@@ -50,7 +50,7 @@ require (
 	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
 	github.com/yargevad/filepathx v1.0.0 // indirect
 	go.opencensus.io v0.24.0 // indirect
-	golang.org/x/arch v0.12.0 // indirect
+	golang.org/x/arch v0.23.0 // indirect
 	golang.org/x/crypto v0.39.0 // indirect
 	golang.org/x/exp v0.0.0-20230713183714-613f0c0eb8a1 // indirect
 	golang.org/x/net v0.41.0 // indirect
